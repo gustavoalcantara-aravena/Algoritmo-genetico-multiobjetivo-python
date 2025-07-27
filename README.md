@@ -1,99 +1,104 @@
+# ⛏️ Mining Process Optimization with Multi-Objective Genetic Algorithm
 
-# ⛏️ **Algoritmo Genético para Optimización de Procesos Mineros**
-
-Este proyecto implementa un **algoritmo genético** para optimizar procesos mineros bajo un enfoque de evaluación multiobjetivo. Utiliza métricas como **rendimiento económico**, **beneficio para los trabajadores**, y **duración total de los procesos**. Además, incluye la evaluación de tecnologías **Industria 4.0** aplicadas a cada proceso. 🚀
-
----
-
-## 📋 **Características**
-- ✅ **Optimización Multiobjetivo:** Evaluación basada en múltiples criterios como economía, eficiencia y beneficio social.
-- ♻️ **Operadores Genéticos:** Implementación de selección, cruza y mutación.
-- 🔍 **Procesos Mineros Modelados:** Incluye 15 procesos modelados con beneficios, duración y tecnologías asociadas.
-- ⚙️ **Soporte para Industria 4.0:** Identificación de tecnologías clave como:
-  - Automatización y control inteligente.
-  - Análisis de datos y big data.
-  - Ciberseguridad.
-  - Simulación y modelado.
-  - Monitoreo en tiempo real.
+This Python project uses a **Multi-Objective Genetic Algorithm (MOGA)** to optimize a sequence of mining processes. The algorithm evaluates trade-offs between economic return, worker benefit, total duration, and adoption of Industry 4.0 components. Created for self-learning purposes, it does not reflect reality, much less the application in a specialized process based on datasets. It only seeks to integrate a concept into the work of this specific algorithm design (it was one of the first Python codes I made.)
 
 ---
 
-## 🛠️ **Requisitos**
-Asegúrate de tener instalado:
-- **Python 3.8** o superior 🐍
-- Módulo estándar `random`.
+## 🎯 Objectives
+
+- 🧠 **Model mining processes** with attributes like duration, economic return, and associated Industry 4.0 technologies.
+- 🤖 **Apply a genetic algorithm** to optimize multi-objective trade-offs.
+- ⚙️ Simulate real-world sequencing decisions under **technological constraints** (e.g., continuity in automation).
+- 🧬 Identify **non-dominated solutions** using Pareto efficiency logic.
 
 ---
 
-## 🚀 **Cómo Ejecutar**
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/mining-genetic-algorithm.git
-   cd mining-genetic-algorithm
-   ```
-2. Ejecuta el script principal:
-   ```bash
-   python proceso_minero.py
-   ```
+## 📦 Features
 
-3. Observa los resultados generados por el algoritmo, incluyendo:
-   - **El mejor cromosoma** de cada generación.
-   - **Rendimiento económico** de las mejores soluciones.
-   - **Duración total** de los procesos optimizados.
-   - **Componentes 4.0 presentes** en las soluciones encontradas.
+- **15 mining processes** modeled with durations, economic values, and 4.0-related technologies.
+- **Custom evaluation function** considering:
+  - Economic performance
+  - Worker benefit
+  - Process duration
+  - Presence of Industry 4.0 components
+- **Penalty system** for broken automation chains
+- **Multi-objective selection** based on non-dominated sorting
+- **Elitism** for preserving top-performing solutions
+- **Random crossover and mutation**
+- **Dominance validation logic** to ensure solution quality
 
 ---
 
-## 🧪 **Detalles del Algoritmo**
-### 🏗️ **Evaluación Multiobjetivo**
-Cada cromosoma representa una secuencia de procesos mineros. El algoritmo evalúa:
-- **Rendimiento Económico:** Basado en la duración y el beneficio de cada proceso.
-- **Beneficio para los Trabajadores:** Suma de los beneficios de los procesos seleccionados.
-- **Duración Total:** Tiempo total requerido por los procesos seleccionados.
-- **Tecnologías 4.0 presentes:** Validación de las tecnologías aplicadas.
+## 🧮 Fitness Function
 
-### 🔧 **Operadores Genéticos**
-- **Selección:** Identificación de soluciones no dominadas para crear la siguiente generación.
-- **Cruza:** Intercambio de genes entre cromosomas para diversificar soluciones.
-- **Mutación:** Alteración aleatoria de genes para explorar nuevas soluciones.
+Each chromosome is evaluated on:
 
-### 💡 **Restricciones Incorporadas**
-- Penalización si no hay continuidad en el uso de tecnologías como "Automatización y control inteligente".
-- Validación de soluciones no dominadas para cumplir los objetivos multiobjetivo.
+1. 💰 `economic_performance = sum(duration × value)`
+2. 👷 `worker_benefit = sum(value)`
+3. ⏱️ `total_duration = sum(duration)`
+4. ⚙️ `4.0_components = union of all components in selected processes`
+
+If a process with `"Automation and intelligent control"` follows one **without it**, economic performance is penalized by 50%.
 
 ---
 
-## 📈 **Resultados Esperados**
-El script imprime en cada generación:
-- Mejor cromosoma encontrado.
-- Métricas clave como rendimiento económico, beneficio para trabajadores y duración total.
-- Componentes 4.0 presentes en la solución.
+## 📊 Output Example (per generation)
 
-Ejemplo de salida:
+```text
+Generation: 35
+Best chromosome: [1, 13, 6, 4, 12, ...]
+Economic Performance: 30400
+Worker Benefit: 980
+Total Duration: 72
+4.0 Components Present: ['Automation and intelligent control', 'Big Data', 'Cybersecurity']
+Fitness: (30400, 980, 72)
 ```
-Generación: 5
-Mejor solución encontrada hasta ahora:
-Cromosoma: [0, 2, 6, 8, 11]
-Rendimiento Económico: 1250
-Beneficio Trabajadores: 350
-Duración Total: 30
-Componentes 4.0 presentes: ['Automatización y control inteligente', 'Ciberseguridad']
+
+
+## 🚀 How to Run
+```bash
+python3 mining_moga.py
 ```
 
 ---
 
-## 🧑‍💻 **Contribuciones**
-¡Las contribuciones son bienvenidas! Para colaborar:
-1. Haz un fork del repositorio.
-2. Crea una nueva rama para tus cambios:
-   ```bash
-   git checkout -b feature/nueva-funcionalidad
-   ```
-3. Envía un pull request explicando tus cambios.
+
+##📘 Suggested Educational Uses
+
+Course: Industrial Optimization / Smart Mining
+
+Topics:
+
+- Genetic algorithms
+
+- Multi-objective optimization
+
+- Process sequencing
+
+- Industry 4.0 adoption
+
+Activities:
+
+- Adjust mutation rate, elitism, or penalty rules
+
+- Add new processes or technologies
+
+- Visualize trade-offs in solution space
 
 ---
 
-## 📜 **Licencia**
-Este proyecto está licenciado bajo la [MIT License](LICENSE). Siéntete libre de usarlo y mejorarlo. 🤝
+
+## 🔍 Notes
+
+- Algorithm is non-deterministic: different runs will yield different Pareto fronts.
+
+- Includes dominance-checking logic to avoid selecting dominated solutions.
+
+- Designed for interpretability and teaching, not high-performance computing.
 
 ---
+
+
+##🧑‍💻 Author
+
+Gustavo Alcántara
